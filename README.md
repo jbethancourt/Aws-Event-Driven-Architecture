@@ -1,6 +1,6 @@
-# aws-event-driven-architecture
+# Building AWS Event-Driven Architecture
 
-First event bus and targets
+##First event bus and targets
 Simple Event Bus
 
 In this module, you will create a custom EventBridge event bus, Orders, and an EventBridge rule, OrderDevRule, which matches all events sent to the Orders event bus and sends the events to a CloudWatch Logs log group, /aws/events/orders. See the diagram above:
