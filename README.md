@@ -27,45 +27,42 @@ The technique of logging all events to CloudWatch Logs is useful when implementi
 ## Step 2: Set up Amazon CloudWatch target (for development work)
 A simple way to test and get rapid feedback for the rules you create for your event bus is to use Amazon CloudWatch as a target. We will create a rule for the Orders bus that will act as a "catch-all" for every event passed to the bus, irrespective of source.
 
-All events warning
-When All events is selected as the event source, EventBridge will send every event that comes to this event bus to this rule. This may result in an extremely high number of target invocations and incur additional costs. In addition, it is possible to create rules that lead to infinite loops, where a rule is triggered repeatedly. To prevent this, we recommend you write rules so that the triggered actions do not re-trigger the same rule. In this workshop we will scope all events coming from the source com.aws.orders
-From the left-hand menu, select Rules.
+1. From the left-hand menu, select Rules.
 
-From the Event bus dropdown, select the Orders event bus
+2. From the Event bus dropdown, select the Orders event bus
 
-Click Create rule New rule
+3. Click Create rule
 
-Define rule detail:
+4. Define rule detail:
 
-Add OrdersDevRule as the Name of the rule
-Add Catchall rule for development purposes for Description
-Select Rule with an event pattern for the Rule type
-Create Bus
+   Add OrdersDevRule as the Name of the rule
+   Add Catchall rule for development purposes for Description
+   Select Rule with an event pattern for the Rule type
 
-In the next step, Build event pattern
 
-under Event source, choose Other
-Create Bus
+5. In the next step, Build event pattern
 
-Under Event pattern, further down the screen, enter the following pattern to catch all events from com.aws.orders:
-1
-2
-3
+   under Event source, choose Other
+
+
+   Under Event pattern, further down the screen, enter the following pattern to catch all events from com.aws.orders:
+```json
 {
    "source": ["com.aws.orders"]
 }
+```
 
-Select next.
-Take this opportunity to familiarize yourself with some the options available for AWS services, there are many examples of pre-defined patterns that are used for service events. You'll be creating your own custom event patterns in the next section.
-Select your rule target:
+   Select next.
 
-From the Target dropdown, select CloudWatch log group
-Name your log group /aws/events/orders
-CloudWatch log group
+6. Select your rule target
 
-Skip through the configure tags section, review your rule configuration and click Create.
+   From the Target dropdown, select CloudWatch log group
+   Name your log group /aws/events/orders
 
-Step 3: Test your dev rule
+
+7. Skip through the configure tags section, review your rule configuration and click Create.
+
+### Step 3: Test your dev rule
 Select the Event buses in the left pane and select Send events to test the newly created event rule.
 
 Make sure that the custom event is populated with the following:
