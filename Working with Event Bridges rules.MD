@@ -1,4 +1,6 @@
-### Working with EventBridge rules
+# Building AWS Event-Driven Architecture
+
+## Working with EventBridge rules
 
 ![Working with EventBridge rules](./images/eb_rules_2.png)
 
