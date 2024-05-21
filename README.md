@@ -9,26 +9,22 @@ In this module, you will create a custom EventBridge event bus, Orders, and an E
 
 The technique of logging all events to CloudWatch Logs is useful when implementing EventBridge rules.
 
-Step 1: Create a custom event bus
-Open the AWS Management Console for EventBridge  in a new tab or window, so you can keep this step-by-step guide open.
+## Step 1: Create a custom event bus
 
-On the EventBridge homepage, under Events, select Event buses from the left navigation.
+1. Open the AWS Management Console for EventBridge  in a new tab or window, so you can keep this step-by-step guide open.
 
-EventBridge Console
+2. On the EventBridge homepage, under Events, select Event buses from the left navigation.
 
-Click Create event bus.
+3. Click Create event bus.
 
-Create Bus
+4. Name the event bus Orders.
 
-Name the event bus Orders.
+5. Leave Event archive and Schema discovery disabled, Resource-based policy blank.
 
-Leave Event archive and Schema discovery disabled, Resource-based policy blank.
+6. Click Create.
 
-Click Create.
 
-Create Bus
-
-Step 2: Set up Amazon CloudWatch target (for development work)
+## Step 2: Set up Amazon CloudWatch target (for development work)
 A simple way to test and get rapid feedback for the rules you create for your event bus is to use Amazon CloudWatch as a target. We will create a rule for the Orders bus that will act as a "catch-all" for every event passed to the bus, irrespective of source.
 
 All events warning
