@@ -1,0 +1,74 @@
+SNS Challenge
+Challenge goal
+Process only orders from US locations (us-west or us-east) that are lab-supplies using a Amazon SNS target (Orders). Similar to the previous use case, but using SNS.
+Step 1: Implement an EventBridge rule to target SNS
+Use the EventBridge Console to:
+
+Add a rule to the Orders event bus with the name USLabSupplyRule
+With an event pattern to match events with a detail location in us-west or us-east, and a detail category with lab-supplies.
+Target the Orders SNS topic
+Here is a sample event to reference:
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+{
+    "version": "0",
+    "id": "6e6b1f6d-48f8-5dff-c2d2-a6f22c2e0086",
+    "detail-type": "Order Notification",
+    "source": "com.aws.orders",
+    "account": "111111111111",
+    "time": "2020-02-23T15:35:41Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+        "category": "lab-supplies",
+        "value": 300,
+        "location": "us-east"
+    }
+}
+
+Step 2: Send test US Orders events
+One of the following events should match the event rule pattern and one should not. Use CloudWatch Logs to verify events that were successfully sent to EventBridge but were not delivered to the target.
+Using the Send events function, send the following Order Notification events from the source com.aws.orders:
+
+1
+{ "category": "lab-supplies", "value": 415, "location": "us-east" }
+
+1
+{ "category": "office-supplies", "value": 1050, "location": "us-west", "signature": [ "John Doe" ] }
+
+Step 3: Verify SNS topic
+If the event sent to the Orders event bus matches the pattern in your rule, then the event will be sent to the Orders SQS Queue (via Orders SNS Topic).
+
+Open the AWS Management Console for SQS  in a new tab or window, so you can keep this step-by-step guide open.
+
+On the SQS homepage, select the Orders queue.
+
+Select the Send and receive messages button.
+
+Select Poll for Messages and verify the first message was delivered and the second was not.
+
+To clean up, select the event, select the Delete button, and select the Delete button again on the Delete Messages confirmation dialog.
+
+Congratulations! You have successfully completed the SNS Challenge.
+Extra credit
+Implement an event pattern using Exists Matching  that matches events which do NOT require a signature (ie. signature does not exists). Do not modify the SNS target and verify backwards compatibility by reusing the sample data above.
+Next steps
+OK, now that you have explored EventBridge Rule patterns, let's look at how we can generate events on a scheduled basis.
+
+Previous
+Next
+© 2008 - 2024, Am
